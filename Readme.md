@@ -122,3 +122,15 @@ Some datapoints that might be helpful
 
 ## Questions for Analysis
 
+1. Does education expenditure map to happiness?
+1. How does unemployment correlate to happiness?
+1. How does governement spending correlate to happiness?
+1. How does education as % of government expenditure as % of GDP correlate to happiness?
+1. The Happiness metric was introduced as an alternative to measuring countries based off GDP, how does it differ or stay the same from GDP and what does that tell us?
+1. What are the similarities and differences between different organization's measurements?
+
+## Articles on Global Happiness
+
+[Visual Capitalist Blogpost](https://www.visualcapitalist.com/measuring-global-happiness-countries/)
+[World Economic Form: Who measures world's happiest countries and how](https://www.weforum.org/agenda/2016/11/happiest-countries-measure-how/)
+[Africa Check: what does UN happiness report really measure](https://africacheck.org/2018/05/07/analysis-what-does-the-un-happiness-report-really-measure/)
