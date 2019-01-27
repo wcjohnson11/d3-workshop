@@ -26,10 +26,11 @@
         border-radius: 10px;
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
         pointer-events: none;
+        background-color: lightgoldenrodyellow;
     }
 
     #tooltip.hidden {
-        display: none;
+        opacity: 0;
     }
 
     #tooltip p {
@@ -39,7 +40,7 @@
         line-height: 20px;
     }
 
-    #tooltip p span#value{
+    #tooltip p span:last-of-type {
         position: relative;
         float: right;
         padding-right: 10px;
@@ -55,13 +56,13 @@
     <p>Making Magic happen</p>
     <!-- <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ7nfb5QTcZrfV_feWxFIs9HlO63Ls3PAFTC0k1ZgRIwonNvHY4p6AlG13SLBwi3OA8eGWrzDFLv-Ou/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"></iframe> -->
     <div class="buttons"></div>
+    <div id="tooltip" class="hidden">
+        <p><strong id="tooltip-name">Important Label Heading</strong></p>
+        <p><span id="name">GDP per Capita</span><span id="gdp-value">100</span></p>
+        <p><span id="name">WHR Score</span><span id="whr-value">100</span></p>
+    </div>
     <svg> 
     </svg>
-    <div id="tooltip" class="hidden">
-        <p><strong>Important Label Heading</strong></p>
-        <p><span id="name">GDP per Capita</span><span id="value">100</span></p>
-        <p><span id="name">WHR Score</span><span id="value">100</span></p>
-    </div>
     <script src="index.js"></script>
 </body>
 </html>
