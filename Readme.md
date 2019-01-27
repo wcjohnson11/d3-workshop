@@ -128,6 +128,8 @@ Some datapoints that might be helpful
 1. How does education as % of government expenditure as % of GDP correlate to happiness?
 1. The Happiness metric was introduced as an alternative to measuring countries based off GDP, how does it differ or stay the same from GDP and what does that tell us?
 1. What are the similarities and differences between different organization's measurements?
+1. How do countries compare when grouped by continent and how do the continents compare?
+1. How do countries compare when grouped by language?
 
 ## Articles on Global Happiness
 
