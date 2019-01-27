@@ -102,7 +102,10 @@ const connectedScatterPlot = (data) => {
 					.text(data.x)
 			);
 
+		
+
 	const svg = d3.select('svg');
+	const tooltip = d3.select('#tooltip')
 
 	// get length of line from the data
 	const l = length(line(data));
@@ -122,9 +125,36 @@ const connectedScatterPlot = (data) => {
 		.append('circle')
 		.attr('cx', (d) => x(d.x))
         .attr('cy', (d) => y(d.y))
-        .attr('r', 3);
-        
-    console.log('sup')
+        .attr('r', 3)
+        .on('mouseover', (d, i, nodes) => {
+            const xPosition = parseFloat(d3.event.pageX)
+			const yPosition = parseFloat(d3.event.pageY)
+
+            tooltip
+                .style('left', `${xPosition}px`)
+				.style('top', `${yPosition}px`)
+				.style('opacity', 0)
+				.classed('hidden', false)
+				.transition()
+					.duration(500)
+					.style('opacity', .9)
+				
+			d3.select('#tooltip-name')
+				.text(d.name)
+            
+            d3.select('#gdp-value')
+                .text(d.x)
+                
+            d3.select('#whr-value')
+                .text(d.y)
+        }).on('mouseout', () => {
+			tooltip
+				.classed('hidden', true)
+				.transition()
+					.duration(300)
+					.style('opacity', 0)
+		})
+		console.log('scatterplot rendered')
 };
 
 const barChart = (data, xAxisVariable, container, colors, margin, height, width) => {
