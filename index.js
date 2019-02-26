@@ -38,9 +38,9 @@ d3.tsv('data.tsv').then(function(data) {
 });
 
 const connectedScatterPlot = (data) => {
-    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const width = window.innerWidth - margin.left - margin.right;
-    const height = window.innerHeight - margin.top - margin.bottom;
+	const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+	const width = window.innerWidth - margin.left - margin.right;
+	const height = window.innerHeight - margin.top - margin.bottom;
 	const cleanNumbers = (string) => parseFloat(string.replace(/,/g, ''));
 
 	data = data.reduce((result, d) => {
@@ -50,7 +50,7 @@ const connectedScatterPlot = (data) => {
 				y: cleanNumbers(d['world happiness report score']),
 				x: cleanNumbers(d['GDP per capita (PPP)'])
 			});
-		} 
+		}
 		return result;
 	}, []);
 	data.y = 'World Happiness Report Score';
@@ -66,13 +66,17 @@ const connectedScatterPlot = (data) => {
 	};
 
 	// Scales
-    const y = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.y).reverse()).nice()
-        .range([ margin.bottom, height - margin.top ]);
+	const y = d3
+		.scaleLinear()
+		.domain(d3.extent(data, (d) => d.y).reverse())
+		.nice()
+		.range([ margin.bottom, height - margin.top ]);
 
-    const x = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.x).reverse()).nice()
-        .range([ width - margin.left, margin.right ]);
+	const x = d3
+		.scaleLinear()
+		.domain(d3.extent(data, (d) => d.x).reverse())
+		.nice()
+		.range([ width - margin.left, margin.right ]);
 
 	// Axes
 	const yAxis = (g) =>
@@ -80,7 +84,10 @@ const connectedScatterPlot = (data) => {
 			.attr('transform', `translate(${margin.left}, 0)`)
 			.call(d3.axisLeft(y))
 			.call((g) => g.select('.domain').remove())
-			.call((g) => g.select('.tick:first-of-type text').clone()
+			.call((g) =>
+				g
+					.select('.tick:first-of-type text')
+					.clone()
 					.attr('x', 4)
 					.attr('text-anchor', 'start')
 					.attr('font-weight', 'bold')
@@ -93,7 +100,9 @@ const connectedScatterPlot = (data) => {
 			.attr('transform', `translate(0,${height - margin.bottom})`)
 			.call(d3.axisBottom(x))
 			.call((g) => g.select('.domain').remove())
-			.call((g) => g.append('text')
+			.call((g) =>
+				g
+					.append('text')
 					.attr('x', width - margin.right)
 					.attr('y', -4)
 					.attr('font-weight', 'bold')
@@ -102,10 +111,8 @@ const connectedScatterPlot = (data) => {
 					.text(data.x)
 			);
 
-		
-
 	const svg = d3.select('svg');
-	const tooltip = d3.select('#tooltip')
+	const tooltip = d3.select('#tooltip');
 
 	// get length of line from the data
 	const l = length(line(data));
@@ -124,37 +131,31 @@ const connectedScatterPlot = (data) => {
 		.enter()
 		.append('circle')
 		.attr('cx', (d) => x(d.x))
-        .attr('cy', (d) => y(d.y))
-        .attr('r', 3)
-        .on('mouseover', (d, i, nodes) => {
-            const xPosition = parseFloat(d3.event.pageX)
-			const yPosition = parseFloat(d3.event.pageY)
+		.attr('cy', (d) => y(d.y))
+		.attr('r', 3)
+		.on('mouseover', (d, i, nodes) => {
+			const xPosition = parseFloat(d3.event.pageX);
+			const yPosition = parseFloat(d3.event.pageY);
 
-            tooltip
-                .style('left', `${xPosition}px`)
+			tooltip
+				.style('left', `${xPosition}px`)
 				.style('top', `${yPosition}px`)
 				.style('opacity', 0)
 				.classed('hidden', false)
 				.transition()
-					.duration(500)
-					.style('opacity', .9)
-				
-			d3.select('#tooltip-name')
-				.text(d.name)
-            
-            d3.select('#gdp-value')
-                .text(d.x)
-                
-            d3.select('#whr-value')
-                .text(d.y)
-        }).on('mouseout', () => {
-			tooltip
-				.classed('hidden', true)
-				.transition()
-					.duration(300)
-					.style('opacity', 0)
+				.duration(500)
+				.style('opacity', 0.9);
+
+			d3.select('#tooltip-name').text(d.name);
+
+			d3.select('#gdp-value').text(d.x);
+
+			d3.select('#whr-value').text(d.y);
 		})
-		console.log('scatterplot rendered')
+		.on('mouseout', () => {
+			tooltip.classed('hidden', true).transition().duration(300).style('opacity', 0);
+		});
+	console.log('scatterplot rendered');
 };
 
 const barChart = (data, xAxisVariable, container, colors, margin, height, width) => {
